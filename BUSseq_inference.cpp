@@ -665,7 +665,7 @@ int main(int argc, char** argv) {
 
     // Calculate BIC 
     auto start_BIC2 = chrono::system_clock::now();
-    double BIC_previous, BIC_revised, BIC_revised2;
+    double BIC;
     loglike_obs = 0.0;
     cell_index = 0;
     for (int b = 0; b < B; b++) {
@@ -742,9 +742,8 @@ int main(int argc, char** argv) {
 		}
 
 
-    BIC_previous = - 2.0 * loglike_obs + log(G * N) * ((B + G) * K+ 2 * B + G * (B * 2 - 1) + N - B);
+    BIC = - 2.0 * loglike_obs + log(G * N) * ((B + G) * K+ 2 * B + G * (B * 2 - 1) + N - B);
 	// all parameters of interest contain pi_{bk}, gamma_{b0(1)}, alpha_g, beta_{gk}, nu_{bg}, delta_{bi}, phi_{bg} 
-	BIC_revised = - 2.0 * loglike_obs + log(G * N) * ( B * K +  2 * B + G + count_gene * (K - 1) + G * (B - 1) + N - B + G * B);
     auto end_BIC2 = chrono::system_clock::now(); 
     chrono::duration<double> elapsed_seconds_BIC2 = end_BIC2-start_BIC2;
     cout << "elapsed time of calculating previous BIC is: " << elapsed_seconds_BIC2.count() << "s" << endl;
@@ -895,21 +894,13 @@ int main(int argc, char** argv) {
     est_File << endl;
     est_File.close();
 
-    //cout << "Writing BIC into the directory " << infer_dir << endl;
-    //est_name = infer_dir + "BIC.txt";
-    //est_File.open(est_name.c_str());
-    //est_File << BIC;    
-    //est_File << endl; 
-    //est_File.close();
-
-    cout << "Writing BIC_previous into the directory " << infer_dir << endl;
+    cout << "Writing BIC into the directory " << infer_dir << endl;
     est_name = infer_dir + "BIC.txt";
     est_File.open(est_name.c_str());
-    est_File << BIC_previous;    
+    est_File << BIC;    
     est_File << endl; 
-	est_File << BIC_revised;
-	est_File << endl;
     est_File.close();
+
 
     delete [] alpha_est;
     for(int g = 0; g < G; g ++){
