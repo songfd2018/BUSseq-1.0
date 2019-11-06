@@ -104,7 +104,7 @@ After running MCMC algorithm, there are two folders created to store the results
 ```
 R --vanilla --slave < correct_batch_effects.R
 ```
-In the posterior inference, we correct the raw read count data as a version of corrected count data stored in the `x_corrected.txt` file by the quantile matching approach. At the same time, we draw the t-SNE plot of the corrected count data colored by batch labels and cell type labels in the [Image](demo/Image) folder. As a result, we can find that these cells are clustered by their cell types after corrected.
+In the posterior inference, we correct the raw read count data as a version of corrected count data stored in the `x_corrected.txt` file by the quantile matching approach. At the same time, we draw the t-SNE plot of the corrected count data colored by batch labels and cell type labels. As a result, we can find that these cells are clustered by their cell types after corrected.
 
 <img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_batch.jpeg" alt="raw_colored_by_batch" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_batch.jpeg" width="400" height="300" /><img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_celltype.jpeg" alt="raw_colored_by_celltype" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_celltype.jpeg" width="400" height="300" />
 
