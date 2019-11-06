@@ -68,6 +68,8 @@ As the same time, `metadata_demo_v1.txt` stores the metadata of the demo study, 
 
 In this demo, I also draw the t-SNE plot of the synthetic count data colored by batch labels and cell type labels.
 ![raw_colored_by_batch](/demo/Image/tsne_simulation_uncorrected_by_batch.jpeg) 
+![raw_colored_by_celltype](/demo/Image/tsne_simulation_uncorrected_by_celltype.jpeg) 
+![legend](/demo/Image/legend.pdf) 
 
 2. Run MCMC sampling: 
 ```
