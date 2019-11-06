@@ -78,7 +78,7 @@ R --vanilla --slave < run_MCMC.R
 ```
 When we do not the number of true cell type number *K*, we run MCMC sampling for different *K*s and select the optimal *K* to obtain the minimum BIC. Thus, we generate the scatter plot of the number of cell type *K* versus BIC values. 
 
-<img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/demo_v1_BIC.jpg" alt="raw_colored_by_batch" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/demo_v1_BIC.jpg" width="300" height="400" />
+<img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/demo_v1_BIC.jpg" alt="raw_colored_by_batch" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/demo_v1_BIC.jpg" width="400" height="300" />
 
 This step will take 12 mins to run MCMC sampling on 4 different *K* values.
 
