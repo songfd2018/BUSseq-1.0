@@ -70,15 +70,17 @@ In this demo, I also draw the t-SNE plot of the synthetic count data colored by 
 
 <img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_uncorrected_by_batch.jpeg" alt="raw_colored_by_batch" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_uncorrected_by_batch.jpeg" width="400" height="300" /><img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_uncorrected_by_celltype.jpeg" alt="raw_colored_by_celltype" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_uncorrected_by_celltype.jpeg" width="400" height="300" />
 
+This step will take 5 secs to generate demo dataset and t-SNE plots.
+
 2. Run MCMC sampling: 
 ```
 R --vanilla --slave < run_MCMC.R
 ```
-When we do not the number of true cell type number *K*, we run MCMC sampling for different *K*s and select the optimal *K* to obtain the minimum BIC.
-
-Thus, we generate the scatter plot of the number of cell type *K* versus BIC values. 
+When we do not the number of true cell type number *K*, we run MCMC sampling for different *K*s and select the optimal *K* to obtain the minimum BIC. Thus, we generate the scatter plot of the number of cell type *K* versus BIC values. 
 
 <img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/demo_v1_BIC.jpg" alt="raw_colored_by_batch" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/demo_v1_BIC.jpg" width="300" height="400" />
+
+This step will take 12 mins to run MCMC sampling on 4 different *K* values.
 
 For general cases, change the working directory and run the following two commands in the terminal to conduct MCMC sampling and posterior inference directly:
 ```
@@ -107,6 +109,8 @@ R --vanilla --slave < correct_batch_effects.R
 In the posterior inference, we correct the raw read count data as a version of corrected count data stored in the `x_corrected.txt` file by the quantile matching approach. At the same time, we draw the t-SNE plot of the corrected count data colored by batch labels and cell type labels. As a result, we can find that these cells are clustered by their cell types after corrected.
 
 <img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_batch.jpeg" alt="raw_colored_by_batch" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_batch.jpeg" width="400" height="300" /><img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_celltype.jpeg" alt="raw_colored_by_celltype" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_celltype.jpeg" width="400" height="300" />
+
+This step will take 5 secs to correct the batch effects and draw the t-SNE plots.
 
 # Remarks
 Please find the more details of how to running *BUSseq* on a simulation dataset and two case studies in the [BUSseq-1.0_implementation](https://github.com/songfd2018/BUSseq-1.0_implementation) directory.
