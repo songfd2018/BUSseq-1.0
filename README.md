@@ -5,8 +5,8 @@
 - [Overview](#overview)
 - [System Requirements](#system-requirements)
 - [Installation](#installation)
-- [Implementation](#implementation)
-- [Remarks](#remarks)
+- [Demo](#demo)
+- [Reproduction](#reproduction)
 
 # Overview
 
@@ -28,6 +28,10 @@ Linux: Ubuntu 18.04 and CentOS 7
 
 The C++ source codes can work on a standard personal computer (PC). The runtimes reported below were generated on 4 Intel i7-6700HQ CPU @ 2.60GHz Cores.
 
+## Software Requirements
+
+We use *R* to generate the synthetic data and conduct visualization. All our codes are tested on *R 3.6.0*. 
+
 # Installation
 
 1. Installing RngStreams: Please download [RngStreams](http://statmath.wu.ac.at/software/RngStreams/) and install it by
@@ -43,14 +47,16 @@ make install
 ```
 make
 ```
-We use [OMPRNG](https://homepage.divms.uiowa.edu/~mbognar/omprng/) to generate random number in parallel.
+We apply [OMPRNG](https://homepage.divms.uiowa.edu/~mbognar/omprng/) to generate random number in parallel. 
+
+The compiling of C++ codes will only take a few seconds.
 
 
-# Implementation
+# Demo
 
-Here we introduce the workflow of BUSseq on a small demo. We prepare the input files and draw figures in *R*, so please find the Rscript in the [demo](demo) folder.
+Here we introduce the workflow of BUSseq on a small demo. We prepare the input files and draw figures in *R*, so please find the *R* scripts in the [demo](demo) folder.
  
-1. Prepare the input files: we generate a synthetic dataset in *R*, please run
+1. Prepare the input files: we generate a synthetic dataset in *R* by running
 ```
 cd /your/working/directory/demo/
 R --vanilla --slave < simulate_data.R
@@ -66,11 +72,11 @@ In this demo, there are N = 450 cells and G = 1,000 genes profiled in 3 batches,
 ```
 As the same time, `metadata_demo_v1.txt` stores the metadata of the demo study, including the batch and cell type information of each cell. For general cases, the count data matrix, dimension and metadata files should be named as `count_data_[your study name]_v[version].txt`, `dim_[your study name]_v[version].txt` and `metadata_[your study name]_v[version].txt`, respectively.
 
-In this demo, I also draw the t-SNE plot of the synthetic count data colored by batch labels and cell type labels.
+In this demo, we also draw the t-SNE plot of the synthetic count data colored by batch labels and cell type labels.
 
 <img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_uncorrected_by_batch.jpeg" alt="raw_colored_by_batch" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_uncorrected_by_batch.jpeg" width="400" height="300" /><img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_uncorrected_by_celltype.jpeg" alt="raw_colored_by_celltype" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_uncorrected_by_celltype.jpeg" width="400" height="300" />
 
-This step will take 5 secs to generate demo dataset and t-SNE plots.
+This step will take 5 secs to generate the demo dataset and t-SNE plots.
 
 2. Run MCMC sampling: 
 ```
@@ -82,7 +88,7 @@ When we do not the number of true cell type number *K*, we run MCMC sampling for
 
 This step will take 12 mins to run MCMC sampling on 4 different *K* values.
 
-For general cases, change the working directory and run the following two commands in the terminal to conduct MCMC sampling and posterior inference directly:
+For general cases, you can change the working directory and run the following two commands in the terminal to conduct MCMC sampling and posterior inference directly:
 ```
 cd /your/working/directory/
 /your/BUSseq/source/code/directory/BUSseq -d./ -r/your/count/data/directory/ -p [your study name] -v [version] -K [the number of cell types] -i [the number of iterations] -o [the number of iterations for each output] -s [seed] -c [the number of cores for parallel]
@@ -106,13 +112,13 @@ After running MCMC algorithm, there are two folders created to store the results
 ```
 R --vanilla --slave < correct_batch_effects.R
 ```
-In the posterior inference, we correct the raw read count data as a version of corrected count data stored in the `x_corrected.txt` file by the quantile matching approach. At the same time, we draw the t-SNE plot of the corrected count data colored by batch labels and cell type labels. As a result, we can find that these cells are clustered by their cell types after corrected.
+To facilite the downstream analysis, we correct batch effects by the quantile matching approach and impute the dropout events. The corrected count matrix is stored in the `x_corrected.txt` with G rows and N columns. At the same time, we draw the t-SNE plot of the corrected count data colored by batch labels and cell type labels. As a result, we can find that these cells are clustered by their cell types after corrected.
 
 <img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_batch.jpeg" alt="raw_colored_by_batch" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_batch.jpeg" width="400" height="300" /><img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_celltype.jpeg" alt="raw_colored_by_celltype" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_celltype.jpeg" width="400" height="300" />
 
-This step will take 5 secs to correct the batch effects and draw the t-SNE plots.
+This step will take 5 secs to achieve the corrected read count matrix and draw the t-SNE plots.
 
-# Remarks
+# Reproduction
 Please find the more details of how to running *BUSseq* on a simulation dataset and two case studies in the [BUSseq-1.0_implementation](https://github.com/songfd2018/BUSseq-1.0_implementation) directory.
 
 
