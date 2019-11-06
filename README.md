@@ -97,7 +97,7 @@ cd /your/working/directory/
 where 
    - *-d* for the directory to save the posterior sampling and inference result;
    - *-r* for the directory of read count data and dimension information created in the step 3;
-   - *-p* for the project name, which shoud be consistent with the name of read count data and dimension file;
+   - *-p* for the project name, which should be consistent with the name of read count data and dimension file;
    - *-v* for the version number;
    - *-K* for the total number of cell types;
    - *-i* for the number of iterations in the MCMC sampling;
@@ -112,7 +112,7 @@ After running MCMC algorithm, there are two folders created to store the results
 ```
 R --vanilla --slave < correct_batch_effects.R
 ```
-To facilite the downstream analysis, we correct batch effects by the quantile matching approach and impute the dropout events. The corrected count matrix is stored in the `x_corrected.txt` with G rows and N columns. At the same time, we draw the t-SNE plot of the corrected count data colored by batch labels and cell type labels. As a result, we can find that these cells are clustered by their cell types after corrected.
+To facilitate the downstream analysis, we correct batch effects by the quantile matching approach and impute the dropout events. The corrected count matrix is stored in the `x_corrected.txt` with G rows and N columns. At the same time, we draw the t-SNE plot of the corrected count data colored by batch labels and cell type labels. As a result, we can find that these cells are clustered by their cell types after corrected.
 
 <img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_batch.jpeg" alt="raw_colored_by_batch" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_batch.jpeg" width="400" height="300" /><img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_celltype.jpeg" alt="raw_colored_by_celltype" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_demo_BUSseq_by_celltype.jpeg" width="400" height="300" />
 
