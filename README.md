@@ -67,9 +67,9 @@ In this demo, there are N = 450 cells and G = 1,000 genes profiled in 3 batches,
 As the same time, `metadata_demo_v1.txt` stores the metadata of the demo study, including the batch and cell type information of each cell. For general cases, the count data matrix, dimension and metadata files should be named as `count_data_[your study name]_v[version].txt`, `dim_[your study name]_v[version].txt` and `metadata_[your study name]_v[version].txt`, respectively.
 
 In this demo, I also draw the t-SNE plot of the synthetic count data colored by batch labels and cell type labels.
-![raw_colored_by_batch](/demo/Image/tsne_simulation_uncorrected_by_batch.jpeg =250x) 
-![raw_colored_by_celltype](/demo/Image/tsne_simulation_uncorrected_by_celltype.jpeg =250x) 
-![legend](/demo/Image/legend.pdf) 
+![raw_colored_by_batch](demo/Image/tsne_simulation_uncorrected_by_batch.jpeg){:height="36px" width="27px"} 
+![raw_colored_by_celltype](demo/Image/tsne_simulation_uncorrected_by_celltype.jpeg){:height="36px" width="27px"} 
+![legend](demo/Image/legend.jpeg) 
 
 2. Run MCMC sampling: 
 ```
