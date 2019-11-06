@@ -3,17 +3,17 @@ rm(list=ls())
 # Run MCMC algorithm #
 ######################
 
-set.seed(1235)
+set.seed(2350)
 # the range of K to test
 k_sel <- 2:5
 # project name
 proj <- "demo"
 # number of the overall MCMC iterations
-iter_num <- 600
+iter_num <- 1000
 # number of iterations for each output
-iter_out <- 300
+iter_out <- 500
 # number of burn-in iterations
-burnin <- 300
+burnin <- 500
 # number of cores running in parallel
 cores <- 4 
 
@@ -33,12 +33,14 @@ for(k in k_sel){
 ###############################
 BIC_k <- rep(Inf, length(k_sel))
 for(i in 1:length(k_sel)){
-  BIC_k[i] <- unlist(read.table(paste0("Inference_K",k_sel[i],"/BIC.txt")))
+  BIC_k[i] <- unlist(read.table(paste0("Inference_K", k_sel[i], "/BIC.txt")))
 }
 
-jpeg(paste("Image/",proj,"_v1_BIC.jpg",sep=""),width = 540, height = 720)
-plot(k_sel,BIC_k,xlab=NA,ylab = NA,type="n",cex.axis=3)
-points(k_sel,BIC_k,type="b",pch=19,cex=3)
+
+jpeg(paste("Image/",proj,"_v1_BIC.jpg",sep=""), width = 800, height = 600)
+par(mar=c(5,5,2,2))
+plot(k_sel, BIC_k, type="n", xlab = "K", ylab = "BIC", cex.axis = 3, cex.lab = 3)
+points(k_sel, BIC_k, type="b", pch=19, cex=3)
 dev.off()
 
 k_opt <- k_sel[which.min(BIC_k)]

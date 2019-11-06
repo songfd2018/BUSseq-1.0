@@ -213,6 +213,7 @@ plot_by_celltype<-function(pic_name,Y,subset=NULL,...,xlab = "tSNE 1", ylab = "t
   points(Y[,1], Y[,2], cex=3,
          pch=20, 
          col=celltype.cols[subset])
+  legend("bottomright", legend=names(table(metadata$celltype)), pch=20, cex=4, col=celltype_color, title = "Cell Type")
   dev.off()
 }
 
@@ -231,7 +232,8 @@ plot_by_batch<-function(pic_name,Y,subset=NULL,...,xlab = "tSNE 1", ylab = "tSNE
   mtext(ylab, side=2, line=5, cex=6)
   points(Y[,1], Y[,2], cex=3,
          pch=20, 
-         col=batch.cols[subset]) 
+         col=batch.cols[subset])
+  legend("bottomright", legend=names(table(metadata$batch)), pch=20, cex=4, col=batch_color, title = "Batch")
   dev.off()
 }
 
@@ -240,15 +242,8 @@ set.seed(123)
 all.dists.unc <- as.matrix(dist(log1p(t(readcount))))
 tsne_uncorrected <- Rtsne(all.dists.unc, is_distance=TRUE, perplexity = 30)
 
-unc_by_celltype<- "Image/tsne_simulation_uncorrected_by_celltype.jpeg"
+unc_by_celltype<- paste0("Image/tsne_",proj,"_uncorrected_by_celltype.jpeg")
 plot_by_celltype(unc_by_celltype, tsne_uncorrected$Y)
 
-unc_by_batch <- "Image/tsne_simulation_uncorrected_by_batch.jpeg"
+unc_by_batch <- paste0("Image/tsne_",proj,"_uncorrected_by_batch.jpeg")
 plot_by_batch(unc_by_batch, tsne_uncorrected$Y)
-
-# legend
-pdf(file="Image/legend.pdf", width=10, height=8)
-plot(c(-5,5),c(-4,4),type="n", bty="n", axes=FALSE, xlab="", ylab="")
-legend(x=-5, y=4, legend=names(table(metadata$batch)), pch=20, cex=2.5, col=batch_color, title = "Batch", bty="n")
-legend(x=-0, y=4, legend=names(table(metadata$celltype)), pch=20, cex=2.5, col=celltype_color, title = "Cell Type", bty="n")
-dev.off()

@@ -106,7 +106,7 @@ if(!dir.exists("Image")){
 
 #set cell type colorings
 celltype_color<-c("#EB4334","#FBBD06","#35AA53","#4586F3")
-celltype.cols <- celltype_color[factor(metadata$celltype)]
+celltype.cols <- celltype_color[metadata$celltype]
 plot_by_celltype<-function(pic_name,Y,subset=NULL,...,xlab = "tSNE 1", ylab = "tSNE 2",main=""){
   if (is.null(subset)) {
     subset <- seq_len(nrow(Y))
@@ -122,6 +122,7 @@ plot_by_celltype<-function(pic_name,Y,subset=NULL,...,xlab = "tSNE 1", ylab = "t
   points(Y[,1], Y[,2], cex=3,
          pch=20, 
          col=celltype.cols[subset])
+  legend("bottomright", legend=names(table(metadata$celltype)), pch=20, cex=4, col=celltype_color, title = "Cell Type")
   dev.off()
 }
 
@@ -140,7 +141,8 @@ plot_by_batch<-function(pic_name,Y,subset=NULL,...,xlab = "tSNE 1", ylab = "tSNE
   mtext(ylab, side=2, line=5, cex=6)
   points(Y[,1], Y[,2], cex=3,
          pch=20, 
-         col=batch.cols[subset]) 
+         col=batch.cols[subset])
+  legend("bottomright", legend=names(table(metadata$batch)), pch=20, cex=4, col=batch_color, title = "Batch")
   dev.off()
 }
 
@@ -148,8 +150,8 @@ set.seed(123)
 all.dists.BUSseq <- as.matrix(dist(t(log1p(x_corrected[D.est==1,]))))
 tsne_BUSseq_dist <- Rtsne(all.dists.BUSseq, is_distance=TRUE, perplexity = 30)
 
-BUSseq_by_celltype<- "Image/tsne_simulation_BUSseq_by_celltype.jpeg"
+BUSseq_by_celltype<- paste0("Image/tsne_",proj,"_BUSseq_by_celltype.jpeg")
 plot_by_celltype(BUSseq_by_celltype, tsne_BUSseq_dist$Y)
 
-BUSseq_by_batch <- "Image/tsne_simulation_BUSseq_by_batch.jpeg"
+BUSseq_by_batch <- paste0("Image/tsne_",proj,"_BUSseq_by_batch.jpeg")
 plot_by_batch(BUSseq_by_batch, tsne_BUSseq_dist$Y)
