@@ -68,7 +68,8 @@ As the same time, `metadata_demo_v1.txt` stores the metadata of the demo study, 
 
 In this demo, I also draw the t-SNE plot of the synthetic count data colored by batch labels and cell type labels.
 
-<img src="" alt="raw_colored_by_batch" data-canonical-src="demo/Image/tsne_simulation_uncorrected_by_batch.jpeg" width="400" height="300" />
+<img src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_simulation_uncorrected_by_batch.jpeg" alt="raw_colored_by_batch" data-canonical-src="https://github.com/songfd2018/BUSseq-1.0/blob/master/demo/Image/tsne_simulation_uncorrected_by_batch.jpeg" width="400" height="300" />
+
 ![raw_colored_by_celltype](demo/Image/tsne_simulation_uncorrected_by_celltype.jpeg){:height="36px" width="27px"} 
 ![legend](demo/Image/legend.jpeg) 
 
