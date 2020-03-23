@@ -1,20 +1,20 @@
 CC=g++
 
-all: BUSseq BUSseq_inference
+all: BUSseq_od BUSseq_inference_od
 
 # link
-BUSseq: BUSseq.o rngstream.o
-	$(CC) -fopenmp BUSseq.o rngstream.o -o BUSseq
+BUSseq_od: BUSseq_od.o rngstream.o
+	$(CC) -fopenmp BUSseq_od.o rngstream.o -o BUSseq_od
 
-BUSseq_inference: BUSseq_inference.o rngstream.o
-	$(CC) -fopenmp BUSseq_inference.o rngstream.o -o BUSseq_inference
+BUSseq_inference_od: BUSseq_inference_od.o rngstream.o
+	$(CC) -fopenmp BUSseq_inference_od.o rngstream.o -o BUSseq_inference_od
 
 # compile
-BUSseq.o: BUSseq.cpp
-	$(CC) -c -fopenmp BUSseq.cpp -w -std=c++11
+BUSseq_od.o: BUSseq_od.cpp
+	$(CC) -c -fopenmp BUSseq_od.cpp -w -std=c++11
 
-BUSseq_inference.o: BUSseq_inference.cpp
-	$(CC) -c -fopenmp BUSseq_inference.cpp -w -std=c++11
+BUSseq_inference_od.o: BUSseq_inference_od.cpp
+	$(CC) -c -fopenmp BUSseq_inference_od.cpp -w -std=c++11
 
 rngstream.o: rngstream.cpp
 	$(CC) -c -fopenmp -lgomp rngstream.cpp
