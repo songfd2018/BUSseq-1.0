@@ -181,7 +181,7 @@ save.image(paste0(proj,"_v1.RData"))
 readcount <- do.call(cbind,y)
 write.table(readcount, file = paste0("RawCountData/count_data_",proj,"_v1.txt"),row.names = FALSE,col.names = FALSE)
 
-dim <- c(N,G,B,nb)
+dim <- c(N,G,B,nb,rep(1,B))
 write.table(dim, file = paste0("RawCountData/dim_",proj,"_v1.txt"),row.names = FALSE, col.names = FALSE)
 
 metadata <- data.frame( batch = paste0("Batch_",rep(1:B,nb)),
