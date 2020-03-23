@@ -20,11 +20,11 @@ cores <- 4
 for(k in k_sel){
   seed <- round(runif(1,0,10000))
   # run MCMC alogrithm
-  system(paste0("../BUSseq -d./ -r./RawCountData/ -p ",proj," -v 1 -K ",k,
+  system(paste0("../BUSseq_od -d./ -r./RawCountData/ -p ",proj," -v 1 -K ",k,
                 " -i ",iter_num," -o ",iter_out, " -s ",seed," -c ",cores))
   
   # conduct posterior inference
-  system(paste0("../BUSseq_inference -d./ -r./RawCountData/ -p ",proj," -v 1 -K ",k,
+  system(paste0("../BUSseq_inference_od -d./ -r./RawCountData/ -p ",proj," -v 1 -K ",k,
                 " -i ",iter_num," -b ",burnin," -c ",cores))
 }
 
